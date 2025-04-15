@@ -1,6 +1,8 @@
 ﻿using EF.DAL.Entities;
 using EF;
 using System;
+using Microsoft.EntityFrameworkCore;
+using MenuSevice;
 
 namespace EF
 {
@@ -8,12 +10,72 @@ namespace EF
     {
         static void Main(string[] args)
         {
-            //функціонал: оновити, видалити, додати, показати
-            var context = new AppDbContext();
+            var context = new AppDbContext(); 
+
+
+            var userWithOrders = context.Users.Include(u => u.Orders);
+            foreach (var u in userWithOrders)
+            {
+                Console.WriteLine($"User: {u.Name}\n \t Orders: ");
+                foreach (var order in u.Orders)
+                {
+                    Console.WriteLine($"Order: {order.Name}, CreatedDate: {order.CreatedDate}");
+                }
+            }
+
+
+
+            MenuService menuService = new MenuService();
+            menuService.Run();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+            /*
+
+            var user = new User
+            {
+                Name = "John Doe"
+            };
+            var order1 = new Order
+            {
+                Name = "Order1",
+                CreatedDate = DateTime.Now,
+                user = user
+            };
+            var order2 = new Order
+            {
+                Name = "Order2",
+                CreatedDate = DateTime.Now,
+                user = user
+            };*/
+            /* context.Users.Add(user);
+            context.SaveChanges();
+            user.Orders.Add(order1);
+            user.Orders.Add(order2);
+            context.SaveChanges();
+            Console.WriteLine("User and orders saved to database.");
+            */
+
+
+            /*
             while (true)
             {
-
-
                 Console.WriteLine("\n1. Show ");
                 Console.WriteLine("2. Add ");
                 Console.WriteLine("3. Update ");
@@ -67,7 +129,6 @@ namespace EF
                         context.SaveChanges();
                         break;
 
-
                     case 4:
                         Console.Clear();
                         Console.WriteLine("Enter num of object:");
@@ -76,10 +137,8 @@ namespace EF
                         context.SaveChanges();
 
                         break;
-
                 }
-
-            }
+            } */
         }
     }
 }
