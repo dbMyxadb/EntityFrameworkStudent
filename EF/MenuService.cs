@@ -122,19 +122,18 @@ namespace MenuSevice
                     string newOrderName2 = Console.ReadLine();
                     _UserSOrderService.UpdateOrder(orderIdToUpdate2, newOrderName2);
                     break;
-              /*  case 13:
+                case 13:
                     Console.Clear();
-                    Console.WriteLine("Enter user ID to show orders:");
-                    int userIdToShowOrders = int.Parse(Console.ReadLine());
-                    _UserSOrderService.ShowAllOrdersByUserId(userIdToShowOrders);
-                    break;*/
+                    Console.WriteLine(" All Users with  orders:");
+                    _UserSOrderService.ShowAllUsersWithOrders();
+                    break;
                 case 0:
                     Console.Clear();
 
                     Environment.Exit(0);
                     break;
                 default:
-                    Console.WriteLine("Invalid option. Please try again.");
+                    Console.WriteLine("Invalid option, please try again. =/");
                     break;
             }
         }

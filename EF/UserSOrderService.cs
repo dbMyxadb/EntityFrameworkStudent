@@ -104,7 +104,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
             var users = GetAllUsers();
             foreach (var user in users)
             {
-                Console.WriteLine($"User: {user.Name}");
+                Console.WriteLine($" User id: {user.Id} ,User: {user.Name}");
                 var orders = GetAllOrders().Where(o => o.UserId == user.Id);
                 foreach (var order in orders)
                 {
