@@ -74,8 +74,60 @@ namespace MenuSevice
 
                 case 5:
                     Console.Clear();
-                    _UserSOrderService.
+                    _UserSOrderService.ShowAllUsers();
                     break;
+                case 6:
+                    Console.Clear();
+                    Console.WriteLine("Enter name:");
+                    string userName = Console.ReadLine();
+                    _UserSOrderService.AddUser(userName);
+                    break;
+                case 7:
+                    Console.Clear();
+                    Console.WriteLine("Enter user ID to update:");
+                    int userIdToUpdate = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Enter new name:");
+                    string newUserName = Console.ReadLine();
+                    _UserSOrderService.UpdateUser(userIdToUpdate, newUserName);
+                    break;
+                case 8:
+                    Console.Clear();
+                    Console.WriteLine("Enter user ID to remove:");
+                    int userIdToRemove = int.Parse(Console.ReadLine());
+                    _UserSOrderService.DeleteUser(userIdToRemove);
+                    break;
+                case 9:
+                    Console.Clear();
+                    _UserSOrderService.ShowAllOrders();
+                    break;
+                case 10:
+                    Console.Clear();
+                    Console.WriteLine("Enter order ID to update:");
+                    int orderIdToUpdate = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Enter new name:");
+                    string newOrderName = Console.ReadLine();
+                    _UserSOrderService.UpdateOrder(orderIdToUpdate, newOrderName);
+                    break;
+                case 11:
+                    Console.Clear();
+                    Console.WriteLine("Enter order ID to remove:");
+                    int orderIdToRemove = int.Parse(Console.ReadLine());
+                    _UserSOrderService.DeleteOrder(orderIdToRemove);
+                    break;
+                case 12:
+                    Console.Clear();
+                    Console.WriteLine("Enter order ID to update:");
+                    int orderIdToUpdate2 = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Enter new name:");
+                    string newOrderName2 = Console.ReadLine();
+                    _UserSOrderService.UpdateOrder(orderIdToUpdate2, newOrderName2);
+                    break;
+              /*  case 13:
+                    Console.Clear();
+                    Console.WriteLine("Enter user ID to show orders:");
+                    int userIdToShowOrders = int.Parse(Console.ReadLine());
+                    _UserSOrderService.ShowAllOrdersByUserId(userIdToShowOrders);
+                    break;*/
                 case 0:
                     Console.Clear();
 
