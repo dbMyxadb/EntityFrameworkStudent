@@ -10,6 +10,75 @@ namespace EF
     {
         static void Main(string[] args)
         {
+
+
+            /*
+            var context = new AppDbContext();
+
+            var user = new User()
+            {
+                Name = "Vlad"
+            };
+
+            var product = new Product()
+            {
+                Name = "Xbox",
+                Price = 1000
+            };
+
+            var product2 = new Product()
+            {
+                Name = "Samsung",
+                Price = 1999
+            };
+
+
+            context.Users.Add(user);
+            context.Products.AddRange(product, product2);
+            context.SaveChanges();
+
+            var user1 = context.Users.FirstOrDefault();
+            var product1 = context.Products.FirstOrDefault();
+            var prod2 = context.Products.FirstOrDefault(p => p.Id == 2);
+
+
+            var order = new Order()
+            {
+                UserId = user1.Id,
+                ProductId = product1.Id,
+                CreatedDate = DateTime.Now
+            };
+
+            var order2 = new Order()
+            {
+                UserId = user1.Id,
+                ProductId = prod2.Id,
+                CreatedDate = DateTime.Now
+            };
+
+            context.Orders.AddRange(order, order2);
+            context.SaveChanges();
+            */
+
+
+
+
+            var context = new AppDbContext();
+
+
+            var UserAndOrder = context.Orders
+                    .Select(o => $"{o.User.Name}  order:{o.Product.Name}  date:{o.CreatedDate}")
+                    .ToList();
+
+            foreach (var order in UserAndOrder)
+            {
+                Console.WriteLine(order);
+            }
+            
+            MenuService menuService = new MenuService();
+            menuService.Run();
+
+            /*
             var context = new AppDbContext(); 
 
 
@@ -19,14 +88,14 @@ namespace EF
                 Console.WriteLine($"User: {u.Name}\n \t Orders: ");
                 foreach (var order in u.Orders)
                 {
-                    Console.WriteLine($"Order: {order.Name}, CreatedDate: {order.CreatedDate}");
+                    Console.WriteLine($"Order: , CreatedDate: {order.CreatedDate}");
                 }
             }
 
 
 
-            MenuService menuService = new MenuService();
-            menuService.Run();
+
+            */
 
 
 
@@ -44,7 +113,6 @@ namespace EF
 
 
 
-            
 
             /*
 

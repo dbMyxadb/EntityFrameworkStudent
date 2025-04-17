@@ -1,6 +1,7 @@
 ﻿using EF.DAL.Entities;
 using EF.DAL;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using EF;
 
 
 namespace MenuSevice
@@ -9,15 +10,17 @@ namespace MenuSevice
     {
         private readonly StudentService _StudentService;
         private readonly UserSOrderService _UserSOrderService;
+        private readonly ProductService _ProductService;
 
         public MenuService()
         {
             _StudentService = new StudentService();
             _UserSOrderService = new UserSOrderService();
+            _ProductService = new ProductService();
         }
     
         public void ShowMenu()
-        {
+        {/*
             Console.WriteLine("\n1. Show all students");
             Console.WriteLine("2. Add student");
             Console.WriteLine("3. Update student");
@@ -33,6 +36,14 @@ namespace MenuSevice
             Console.WriteLine("12.Edit Orders");
             Console.WriteLine("13.Show all User with Ordes");
             Console.WriteLine("14. Top 3 user order count");
+            */
+            Console.WriteLine("+=================+\n work with Products\n");
+            Console.WriteLine("31. Show all Products");
+            Console.WriteLine("32. Add Product");
+            Console.WriteLine("33. Edit Product");
+            Console.WriteLine("34. Delete Products");
+
+
             Console.WriteLine("0. Exitn\n");
         }
         public void ExecuteOption(int option)
@@ -97,7 +108,7 @@ namespace MenuSevice
                     break;
                 case 9:
                     Console.Clear();
-                    _UserSOrderService.ShowAllOrders();
+                    //_UserSOrderService.ShowAllOrders();
                     break;
                 case 10:
                     Console.Clear();
@@ -105,7 +116,7 @@ namespace MenuSevice
                     string orderName = Console.ReadLine();
                     Console.WriteLine("Enter user ID for the order:");
                     int userIdForOrder = int.Parse(Console.ReadLine());
-                    _UserSOrderService.AddOrder(orderName, userIdForOrder);
+                   // _UserSOrderService.AddOrder(orderName, userIdForOrder);
                     break;
                 case 11:
                     Console.Clear();
@@ -119,12 +130,12 @@ namespace MenuSevice
                     int orderIdToUpdate2 = int.Parse(Console.ReadLine());
                     Console.WriteLine("Enter new name:");
                     string newOrderName2 = Console.ReadLine();
-                    _UserSOrderService.UpdateOrder(orderIdToUpdate2, newOrderName2);
+                    //_UserSOrderService.UpdateOrder(orderIdToUpdate2, newOrderName2);
                     break;
                 case 13:
                     Console.Clear();
                     Console.WriteLine(" All Users with  orders:");
-                    _UserSOrderService.ShowAllUsersWithOrders();
+                //    _UserSOrderService.ShowAllUsersWithOrders();
                     break;
 
                 //// Homework ////
@@ -133,6 +144,56 @@ namespace MenuSevice
                     Console.WriteLine("Top 3 users with the most orders:");
                     _UserSOrderService.Showtop3UsersWithMostOrders();
                     break;
+
+
+
+
+
+                case 31:
+                    Console.Clear();
+                    Console.WriteLine("All Products:");
+                    _ProductService.ShowAllProducts();
+                    break;
+                case 32:
+                    Console.Clear();
+                    Console.WriteLine("Enter product name:");
+                    string productName = Console.ReadLine();
+                    Console.WriteLine("Enter product price:");
+                    decimal productPrice = decimal.Parse(Console.ReadLine());
+                    var product = new Product
+                    {
+                        Name = productName,
+                        Price = productPrice
+                    };
+                    _ProductService.AddProduct(product);
+                    break;
+                case 33:
+                    Console.Clear();
+                    Console.WriteLine("Enter product ID to update:");
+                    int productIdToUpdate = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Enter new name:");
+                    string newProductName = Console.ReadLine();
+                    Console.WriteLine("Enter new price:");
+                    decimal newProductPrice = decimal.Parse(Console.ReadLine());
+                    var prod1 = new Product { Name = newProductName, Price = newProductPrice };
+                    
+                    _ProductService.UpdateProduct(productIdToUpdate,prod1);
+                    break;
+                case 34:
+                    Console.Clear();
+                    Console.WriteLine("Enter product ID to remove:");
+                    int productIdToRemove = int.Parse(Console.ReadLine());
+                    var productToRemove = _ProductService.GetAllProducts().FirstOrDefault(p => p.Id == productIdToRemove);
+                    if (productToRemove != null)
+                    {
+                        _ProductService.DeleteProduct(productToRemove);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Product not found.");
+                    }
+                    break;
+
                 case 0:
                     Console.Clear();
 
