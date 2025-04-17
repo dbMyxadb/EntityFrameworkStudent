@@ -95,7 +95,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
                 var user = GetAllUsers().FirstOrDefault(u => u.Id == order.UserId);
                 if (user != null)
                 {
-                    Console.WriteLine($"Order Id: {order.Id}, Name: {order.Name}, User: {user.Name}");
+                    Console.WriteLine($"Order Id: {order.Id}, Name: {order.Name}, User Id: {user.Id} User: {user.Name}");
                 }
             }
         }
@@ -112,6 +112,25 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
                 }
             }
         }
-   
-
+    public int OrderCount(int userId)
+    {
+        var orders = GetAllOrders().Where(o => o.UserId == userId);
+        return orders.Count();
     }
+        public void Showtop3UsersWithMostOrders()
+    {
+        var users = GetAllUsers();
+        var orders = GetAllOrders();
+        var userOrderCount = users.Select(u => new
+        {
+            User = u,
+            OrderCount = orders.Count()
+        }).OrderByDescending(u => u.OrderCount).Take(3);
+        foreach (var user in userOrderCount)
+        {
+            Console.WriteLine($"User: {user.User.Name}, Orders: {user.OrderCount}");
+        }
+    }   
+
+
+}

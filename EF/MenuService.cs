@@ -28,11 +28,11 @@ namespace MenuSevice
             Console.WriteLine("7.Edit Users");
             Console.WriteLine("8.Delete Users");
             Console.WriteLine("9.Show all Orders");
-            Console.WriteLine("10.Edit Orders");
+            Console.WriteLine("10.Add new Orders");
             Console.WriteLine("11.Delete Orders");
             Console.WriteLine("12.Edit Orders");
             Console.WriteLine("13.Show all User with Ordes");
-
+            Console.WriteLine("14. Top 3 user order count");
             Console.WriteLine("0. Exitn\n");
         }
         public void ExecuteOption(int option)
@@ -70,8 +70,7 @@ namespace MenuSevice
                     int idToRemove = int.Parse(Console.ReadLine());
                     RemoveStudent(idToRemove);
                     break;
-
-
+                    ////////////////////////
                 case 5:
                     Console.Clear();
                     _UserSOrderService.ShowAllUsers();
@@ -102,11 +101,11 @@ namespace MenuSevice
                     break;
                 case 10:
                     Console.Clear();
-                    Console.WriteLine("Enter order ID to update:");
-                    int orderIdToUpdate = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Enter new name:");
-                    string newOrderName = Console.ReadLine();
-                    _UserSOrderService.UpdateOrder(orderIdToUpdate, newOrderName);
+                    Console.WriteLine("Enter order name:");
+                    string orderName = Console.ReadLine();
+                    Console.WriteLine("Enter user ID for the order:");
+                    int userIdForOrder = int.Parse(Console.ReadLine());
+                    _UserSOrderService.AddOrder(orderName, userIdForOrder);
                     break;
                 case 11:
                     Console.Clear();
@@ -126,6 +125,13 @@ namespace MenuSevice
                     Console.Clear();
                     Console.WriteLine(" All Users with  orders:");
                     _UserSOrderService.ShowAllUsersWithOrders();
+                    break;
+
+                //// Homework ////
+                case 14:
+                    Console.Clear();
+                    Console.WriteLine("Top 3 users with the most orders:");
+                    _UserSOrderService.Showtop3UsersWithMostOrders();
                     break;
                 case 0:
                     Console.Clear();
