@@ -30,16 +30,17 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
                 _userRepository.Update(user);
             }
         }
-        /*public void UpdateOrder(int id, string name)
+        public void UpdateOrder(int id, string name, int userId)
+    {
+        var order = _orderRepository.GetAll().FirstOrDefault(o => o.Id == id);
+        if (order != null)
         {
-            var order = _orderRepository.GetAll().FirstOrDefault(o => o.Id == id);
-            if (order != null)
-            {
-                order.Name = name;
-                _orderRepository.Update(order);
-            }
-        }*/
-        public void DeleteUser(int id)
+            order.Name = name;
+            order.UserId = userId;
+            _orderRepository.Update(order);
+        }
+    }
+    public void DeleteUser(int id)
         {
             var user = _userRepository.GetAll().FirstOrDefault(u => u.Id == id);
             if (user != null)
@@ -71,7 +72,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
                 Console.WriteLine($"Id: {user.Id}, Name: {user.Name}");
             }
         }
-        /*public void ShowAllOrders()
+        public void ShowAllOrders()
         {
             var orders = GetAllOrders();
             foreach (var order in orders)
@@ -86,7 +87,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
             {
                 Console.WriteLine($"Order Id: {order.Id}, Name: {order.Name}");
             }
-        }*
+        }
         public void ShowOrderUser(int orderId)
         {
             var order = GetAllOrders().FirstOrDefault(o => o.Id == orderId);
@@ -98,8 +99,8 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
                     Console.WriteLine($"Order Id: {order.Id}, Name: {order.Name}, User Id: {user.Id} User: {user.Name}");
                 }
             }
-        }*/
-       /* public void ShowAllUsersWithOrders()
+        }
+        public void ShowAllUsersWithOrders()
         {
             var users = GetAllUsers();
             foreach (var user in users)
@@ -111,7 +112,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
                     Console.WriteLine($"\tOrder: {order.Name}");
                 }
             }
-        }*/
+        }
     public int OrderCount(int userId)
     {
         var orders = GetAllOrders().Where(o => o.UserId == userId);
